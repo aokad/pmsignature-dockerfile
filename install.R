@@ -1,6 +1,6 @@
 source("http://bioconductor.org/biocLite.R")
 #biocLite()
-biocLite(c("GenomicRanges", "BSgenome.Hsapiens.UCSC.hg19"), suppressUpdates=TRUE)
+biocLite(c("GenomicRanges", "BSgenome.Hsapiens.UCSC.hg19"), ask=FALSE)
 install.packages("devtools", dependencies = TRUE)
 install.packages("ggplot2", dependencies = TRUE)
 install.packages("Rcpp", dependencies = TRUE)
