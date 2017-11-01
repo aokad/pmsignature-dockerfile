@@ -1,0 +1,8 @@
+source("http://bioconductor.org/biocLite.R")
+biocLite(c("GenomicRanges", "BSgenome.Hsapiens.UCSC.hg19"))
+install.packages("devtools")
+install.packages("ggplot2")
+install.packages("Rcpp")
+install.packages("rjson")
+library(devtools)
+devtools::install_github("friend1ws/pmsignature")
