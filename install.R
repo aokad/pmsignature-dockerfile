@@ -1,4 +1,5 @@
 source("http://bioconductor.org/biocLite.R")
+biocLite()
 biocLite(c("GenomicRanges", "BSgenome.Hsapiens.UCSC.hg19"))
 install.packages("devtools")
 install.packages("ggplot2")
