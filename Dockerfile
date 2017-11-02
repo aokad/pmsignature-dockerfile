@@ -11,6 +11,7 @@ RUN apt-get -y update && \
     apt-get install -y libssl-dev && \
     apt-get install -y python && \
     apt-get install -y python-pip && \
+    apt-get install -y git && \
     \
     Rscript -e "install.packages('devtools')" && \
     Rscript -e "install.packages('ggplot2')" && \
