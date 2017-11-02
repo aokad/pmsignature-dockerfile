@@ -2,7 +2,7 @@ FROM r-base:3.4.2
 MAINTAINER aokad <aokad@hgc.jp>
 
 # RUN: build
-# •K—vƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒCƒ“ƒXƒg[ƒ‹
+# å¿…è¦ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y libcurl4-openssl-dev
@@ -14,15 +14,22 @@ RUN apt-get install -y python
 RUN apt-get install -y python-pip
 RUN apt-get install -y git
 
-# pmsignature, paplot‚ÌƒCƒ“ƒXƒg[ƒ‹
+# pmsignature, paplotã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+RUN Rscript -e "install.packages('devtools')"
+RUN Rscript -e "install.packages('ggplot2')"
+RUN Rscript -e "install.packages('Rcpp')"
+RUN Rscript -e "install.packages('rjson')"
+RUN Rscript -e "source('http://bioconductor.org/biocLite.R');biocLite(c('GenomicRanges', 'BSgenome.Hsapiens.UCSC.hg19'), ask=FALSE)"
+RUN Rscript -e "library(devtools);devtools::install_github('friend1ws/pmsignature')"
+
 RUN mkdir /tools
-RUN git clone https://github.com/aokad/pmsignature-dockerfile.git /tools/pmsignature-dockerfile
-RUN R --vanilla --slave < /tools/pmsignature-dockerfile/install.R
 RUN wget https://github.com/Genomon-Project/paplot/archive/v0.5.5.zip
-RUN unzip v0.5.5.zip -d /tools
-RUN python /tools/setup.py build install
 RUN wget https://github.com/Genomon-Project/genomon_Rscripts/archive/v0.1.3.zip
+RUN git clone https://github.com/aokad/pmsignature-dockerfile.git /tools/pmsignature-dockerfile
+
+RUN unzip v0.5.5.zip -d /tools
 RUN unzip v0.1.3.zip -d /tools
+RUN cd /tools/paplot-0.5.5; python setup.py build install
 RUN cp /tools/pmsignature-dockerfile/run.sh /run.sh
 
 # CMD: run
